@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT ;
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-output.json');
+const swaggerDocument = require('./swagger/swagger-output.json');
 
 
 app.use(express.json());
