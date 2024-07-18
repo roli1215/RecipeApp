@@ -8,10 +8,8 @@ const app = express();
 const port = process.env.PORT ;
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerOptions = require('./swagger/configuration').options;
+const swaggerDocument = require('./swagger-output.json');
 
-const specs = swaggerJsdoc(swaggerOptions);
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -20,7 +18,7 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.get('/', (req, res) => {
