@@ -1,29 +1,24 @@
 
 const express = require('express');
-const dotenv = require('dotenv');
+const sequelize = require('sequelize');
+const dotenv = require('dotenv').config();
+const cookieParser = require('cookie-parser');
+const db = require('./models');
+const userRoutes = require('./routes/userRoutes');
 
-dotenv.config();
+const port = process.env.PORT;
 
 const app = express();
-const port = process.env.PORT ;
-
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger/swagger-output.json');
-
 
 app.use(express.json());
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+db.sequelize.sync({ force: false}).then(() => {
+  console.log('Database connected');
 });
+
+app.use('/api/users', userRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
