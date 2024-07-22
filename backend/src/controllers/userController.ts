@@ -22,9 +22,8 @@ const signup = async (req, res) => {
      });
 
      res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
-     console.log("user", JSON.stringify(user, null, 2));
-     console.log(token);
-     
+     console.log("Successfully signed up");
+
      return res.status(201).send(user);
    } else {
      return res.status(409).send("Details are not correct");
@@ -53,12 +52,12 @@ const { email, password } = req.body;
        });
 
        res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
-       console.log("user", JSON.stringify(user, null, 2));
-       console.log(token);
+       console.log("Successfully logged in");
        
-       return res.status(201).send(user);
+       return res.status(201)
      } else {
-       return res.status(401).send("Authentication failed");
+      console.log("Authentication failed");
+       return res.status(401)
      }
    } else {
      return res.status(401).send("Authentication failed");
