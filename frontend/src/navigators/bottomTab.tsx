@@ -4,13 +4,17 @@ import { Home } from "../screens/home";
 import { Settings } from "../screens/settings";
 import { Recipe } from "../screens/recipes";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Login } from "../screens/login";
+import { Register } from "../screens/register";
 
 
 const Bottom = createBottomTabNavigator();
 
 export const BottomTab = () => {
     return (
+       
         <Bottom.Navigator
+        initialRouteName="Login"
             screenOptions={
                 {
                     
@@ -26,14 +30,14 @@ export const BottomTab = () => {
                     }
                 }
             }>
-            <Bottom.Screen name="Recipe" component={Recipe} 
-                options={{
-                    tabBarIcon: ({color, focused}) => 
-                    <Icon name="home" size={focused ? 30 : 20} color={color} />
-                }}
-            />
+            <Bottom.Screen name="Login" component={Login} />
+            <Bottom.Screen name="Register" component={Register} />
+            <Bottom.Screen name="Recipe" component={Recipe}/>
             <Bottom.Screen name="Home" component={Home} />
             <Bottom.Screen name="Settings" component={Settings} />
         </Bottom.Navigator>
+        
+            
+        
     )
 }
