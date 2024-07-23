@@ -1,9 +1,9 @@
 import { Text } from "react-native";
 
-export const Home: React.FC = () => {
+export const Recipe: React.FC = () => {
     return (
         <Text>
-           Home Screen
+           Recipes Screen
         </Text>
     )
 }
